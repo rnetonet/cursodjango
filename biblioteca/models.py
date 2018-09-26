@@ -61,7 +61,7 @@ class Exemplar(models.Model):
     data_aquisicao = models.DateField('Data de Aquisição', auto_now_add=True)
 
     def __unicode__(self):
-        return self.titulo.nome
+        return '{} ({})'.format(self.titulo.nome, self.pk)
     
     class Meta:
         verbose_name = 'Exemplar'

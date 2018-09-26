@@ -52,11 +52,12 @@ class ExemplarAdmin(admin.ModelAdmin):
 
 class PessoaFisicaAdmin(admin.ModelAdmin):
     list_display = ('id', 'nome', 'username')
+    form = forms.PessoaFisicaForm
 
 
 class EmprestimoAdmin(admin.ModelAdmin):
     list_display = ('id', 'exemplar', 'usuario', 'data_emprestimo', 'data_previsto_devolucao', 'data_devolucao')
-    fields = ('exemplar', 'usuario')
+    form = forms.EmprestimoForm
 
 admin.site.register(models.Campus, CampusAdmin)
 admin.site.register(models.Biblioteca, BibliotecaAdmin)

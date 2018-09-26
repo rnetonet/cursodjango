@@ -1,2 +1,5 @@
+*.pyc
 .vscode
 venv
+public/media/*
+!public/media/.keep

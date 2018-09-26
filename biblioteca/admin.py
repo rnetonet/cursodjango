@@ -23,6 +23,14 @@ class CategoriaAdmin(admin.ModelAdmin):
 
 class TituloAdmin(admin.ModelAdmin):
     list_display = ('id', 'nome', 'get_categorias', 'get_imagem')
+    fieldsets = (
+        ('Dados Gerais', {
+            'fields': ('nome', 'categorias')
+        }),
+        ('Upload de arquivos', {
+            'fields': ('imagem', )
+        }),
+    )
 
     def get_imagem(self, obj):
         return u'<img width=64 height=64 src="{}" />'.format(obj.imagem.url)

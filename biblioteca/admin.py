@@ -2,7 +2,9 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-import biblioteca
+
+import forms
+import models
 
 # Config admin
 admin.site.site_header = 'Curso Python e Django'
@@ -11,7 +13,7 @@ admin.site.index_title = 'Aplicações'
 # Register your models here.
 class CampusAdmin(admin.ModelAdmin):
     list_display = ('id', 'nome')
-
+    form = forms.CampusForm
 
 class BibliotecaAdmin(admin.ModelAdmin):
     list_display = ('id', 'nome', 'campus')
@@ -23,14 +25,15 @@ class CategoriaAdmin(admin.ModelAdmin):
 
 class TituloAdmin(admin.ModelAdmin):
     list_display = ('id', 'nome', 'get_categorias', 'get_imagem')
-    fieldsets = (
-        ('Dados Gerais', {
-            'fields': ('nome', 'categorias')
-        }),
-        ('Upload de arquivos', {
-            'fields': ('imagem', )
-        }),
-    )
+    form = forms.TituloForm
+    # fieldsets = (
+    #     ('Dados Gerais', {
+    #         'fields': ('nome', 'categorias')
+    #     }),
+    #     ('Upload de arquivos', {
+    #         'fields': ('imagem', )
+    #     }),
+    # )
 
     def get_imagem(self, obj):
         return u'<img width=64 height=64 src="{}" />'.format(obj.imagem.url)
@@ -55,10 +58,10 @@ class EmprestimoAdmin(admin.ModelAdmin):
     list_display = ('id', 'exemplar', 'usuario', 'data_emprestimo', 'data_previsto_devolucao', 'data_devolucao')
     fields = ('exemplar', 'usuario')
 
-admin.site.register(biblioteca.models.Campus, CampusAdmin)
-admin.site.register(biblioteca.models.Biblioteca, BibliotecaAdmin)
-admin.site.register(biblioteca.models.Categoria, CategoriaAdmin)
-admin.site.register(biblioteca.models.Titulo, TituloAdmin)
-admin.site.register(biblioteca.models.Exemplar, ExemplarAdmin)
-admin.site.register(biblioteca.models.PessoaFisica, PessoaFisicaAdmin)
-admin.site.register(biblioteca.models.Emprestimo, EmprestimoAdmin)
+admin.site.register(models.Campus, CampusAdmin)
+admin.site.register(models.Biblioteca, BibliotecaAdmin)
+admin.site.register(models.Categoria, CategoriaAdmin)
+admin.site.register(models.Titulo, TituloAdmin)
+admin.site.register(models.Exemplar, ExemplarAdmin)
+admin.site.register(models.PessoaFisica, PessoaFisicaAdmin)
+admin.site.register(models.Emprestimo, EmprestimoAdmin)
